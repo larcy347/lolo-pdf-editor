@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lolo PDF Editor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">P</span><span>Lolo PDF Editor</span></div>
+    <div class="file-actions">
+      <label class="button secondary" for="file-input">Open PDF</label>
+      <input id="file-input" type="file" accept="application/pdf">
+      <button id="save-button" class="button primary" disabled>Export PDF</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-heading">
+        <h2>Pages</h2>
+        <span id="page-count">0</span>
+      </div>
+      <div id="thumbnails" class="thumbnails">
+        <div class="empty-state">Open a PDF to see its pages.</div>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <div class="toolbar" aria-label="Editing tools">
+        <div class="tool-group">
+          <button class="tool active" data-tool="select" title="Select and move annotations">↖ <span>Select</span></button>
+          <button class="tool" data-tool="text" title="Add text">T <span>Text</span></button>
+          <button class="tool" data-tool="draw" title="Draw freehand">✎ <span>Draw</span></button>
+          <button class="tool" data-tool="highlight" title="Highlight an area">▰ <span>Highlight</span></button>
+          <button class="tool" data-tool="image" title="Place an image">▧ <span>Image</span></button>
+          <button class="tool" data-tool="signature" title="Place an electronic signature">✍ <span>Sign</span></button>
+          <button class="tool" data-tool="field" title="Add a form input">▤ <span>Field</span></button>
+          <button class="tool" data-tool="checkbox" title="Add a checkbox">☑ <span>Check</span></button>
+        </div>
+        <div class="tool-group compact">
+          <label>Color <input id="color-input" type="color" value="#2563eb"></label>
+          <label>Size <input id="size-input" type="number" min="8" max="72" value="18"></label>
+          <button id="undo-button" class="icon-button" title="Undo last annotation" disabled>↶</button>
+          <button id="clear-button" class="icon-button" title="Clear annotations on this page" disabled>⌫</button>
+          <button id="edit-pages" class="button secondary" disabled>Pages</button>
+        </div>
+      </div>
+
+      <div class="document-bar">
+        <button id="previous-page" class="icon-button" disabled>‹</button>
+        <span>Page <input id="page-input" type="number" min="1" value="1" disabled> of <strong id="current-page-total">0</strong></span>
+        <button id="next-page" class="icon-button" disabled>›</button>
+        <span class="separator"></span>
+        <button id="zoom-out" class="icon-button" disabled>−</button>
+        <span id="zoom-label">100%</span>
+        <button id="zoom-in" class="icon-button" disabled>+</button>
+      </div>
+
+      <div id="canvas-area" class="canvas-area">
+        <div id="welcome" class="welcome">
+          <div class="welcome-icon">PDF</div>
+          <h1>Open a PDF to begin</h1>
+          <p>Add text, draw, highlight, place images, and export your edited document.</p>
+          <label class="button primary" for="file-input">Choose PDF</label>
+        </div>
+        <div id="document-stage" class="document-stage" hidden>
+          <canvas id="pdf-canvas"></canvas>
+          <canvas id="annotation-canvas"></canvas>
+          <div id="text-layer" class="text-layer"></div>
+        </div>
+      </div>
+      <div id="status" class="status" role="status">Ready</div>
+    </section>
+  </main>
+
+  <input id="image-input" type="file" accept="image/*" hidden>
+  <div id="text-dialog" class="dialog-backdrop" hidden>
+    <form id="text-form" class="dialog">
+      <h2>Add text</h2>
+      <label for="text-value">Text</label>
+      <textarea id="text-value" rows="4" required placeholder="Type your text"></textarea>
+      <div class="dialog-actions">
+        <button type="button" id="cancel-text" class="button secondary">Cancel</button>
+        <button type="submit" class="button primary">Add text</button>
+      </div>
+    </form>
+  </div>
+  <div id="pages-dialog" class="dialog-backdrop" hidden>
+    <div class="dialog">
+      <h2>Manage pages</h2>
+      <p class="muted">Delete pages or move them up and down. Changes apply on export.</p>
+      <div id="page-manager" class="page-manager"></div>
+      <div class="dialog-actions"><button type="button" id="close-pages" class="button secondary">Done</button></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

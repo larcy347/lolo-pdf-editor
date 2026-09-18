@@ -1,0 +1,78 @@
+:root {
+  color-scheme: light;
+  --blue: #2563eb;
+  --blue-dark: #1d4ed8;
+  --ink: #172033;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --panel: #ffffff;
+  --canvas: #f3f4f6;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--canvas); font: 14px/1.4 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; }
+button, input, textarea { font: inherit; }
+button, label.button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+.topbar { height: 64px; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; background: var(--panel); border-bottom: 1px solid var(--line); }
+.brand, .file-actions, .tool-group, .document-bar, .sidebar-heading, .dialog-actions { display: flex; align-items: center; }
+.brand { gap: 10px; font-weight: 750; font-size: 17px; }
+.brand-mark { width: 29px; height: 29px; display: grid; place-items: center; color: #fff; background: var(--blue); border-radius: 8px; font-weight: 800; }
+.file-actions { gap: 10px; }
+#file-input { display: none; }
+.button { border: 0; border-radius: 7px; padding: 9px 14px; font-weight: 650; display: inline-block; }
+.button.primary { color: #fff; background: var(--blue); }
+.button.primary:hover { background: var(--blue-dark); }
+.button.secondary { color: var(--ink); background: #f1f3f6; }
+.app-shell { height: calc(100vh - 64px); display: flex; }
+.sidebar { width: 190px; padding: 18px 12px; overflow: auto; background: #fafafa; border-right: 1px solid var(--line); }
+.sidebar-heading { justify-content: space-between; margin: 0 6px 14px; }
+.sidebar h2 { margin: 0; font-size: 14px; }
+#page-count { color: var(--muted); }
+.thumbnails { display: grid; gap: 12px; }
+.thumbnail { padding: 5px; border: 2px solid transparent; background: transparent; border-radius: 7px; cursor: pointer; }
+.thumbnail.active { border-color: var(--blue); }
+.thumbnail canvas { width: 100%; height: auto; display: block; background: #fff; box-shadow: 0 1px 5px #0002; }
+.thumbnail-number { display: block; color: var(--muted); text-align: center; margin-top: 4px; font-size: 12px; }
+.empty-state { color: var(--muted); padding: 18px 6px; text-align: center; font-size: 12px; }
+.workspace { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.toolbar { min-height: 53px; padding: 8px 16px; display: flex; justify-content: space-between; gap: 12px; background: var(--panel); border-bottom: 1px solid var(--line); }
+.tool-group { gap: 5px; }
+.tool { border: 0; border-radius: 6px; padding: 7px 10px; color: #4b5563; background: transparent; }
+.tool span { margin-left: 4px; }
+.tool:hover, .tool.active { color: var(--blue); background: #eff6ff; }
+.tool-group.compact { gap: 10px; color: var(--muted); font-size: 12px; }
+.tool-group.compact label { display: flex; align-items: center; gap: 5px; }
+#color-input { width: 27px; height: 27px; padding: 0; border: 0; background: none; }
+#size-input { width: 52px; padding: 5px; border: 1px solid var(--line); border-radius: 5px; }
+.icon-button { width: 30px; height: 30px; border: 0; border-radius: 6px; color: #4b5563; background: transparent; font-size: 21px; line-height: 1; }
+.icon-button:hover:not(:disabled) { background: #f1f3f6; }
+.document-bar { height: 45px; padding: 0 18px; justify-content: center; gap: 10px; color: var(--muted); background: var(--panel); border-bottom: 1px solid var(--line); }
+.document-bar input { width: 40px; padding: 3px; text-align: center; border: 1px solid var(--line); border-radius: 4px; }
+.separator { height: 20px; border-left: 1px solid var(--line); margin: 0 7px; }
+.canvas-area { position: relative; flex: 1; overflow: auto; padding: 30px; }
+.welcome { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; color: var(--muted); }
+.welcome h1 { margin: 12px 0 5px; color: var(--ink); font-size: 22px; }
+.welcome p { margin: 0 0 20px; }
+.welcome-icon { display: grid; place-items: center; width: 72px; height: 82px; color: var(--blue); background: #dbeafe; border: 2px solid #93c5fd; border-radius: 8px; font-weight: 800; }
+.document-stage { position: relative; width: max-content; margin: 0 auto; background: white; box-shadow: 0 2px 15px #0002; }
+#pdf-canvas, #annotation-canvas { display: block; }
+#annotation-canvas { position: absolute; inset: 0; z-index: 2; }
+.text-layer { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.text-layer .placed-text { position: absolute; white-space: pre-wrap; pointer-events: auto; cursor: move; line-height: 1.2; }
+.text-layer .placed-field { position: absolute; pointer-events: auto; border: 1px dashed var(--blue); background: #fff9; padding: 3px; }
+.text-layer .placed-check { position: absolute; pointer-events: auto; width: 22px; height: 22px; accent-color: var(--blue); }
+.placed-signature { font-family: "Segoe Script", cursive; font-style: italic; font-weight: 700; }
+.muted { color: var(--muted); }
+.page-manager { display: grid; gap: 6px; max-height: 45vh; overflow: auto; }
+.page-manager-row { display: flex; align-items: center; gap: 8px; padding: 6px; border: 1px solid var(--line); border-radius: 5px; }
+.page-manager-row span { flex: 1; }
+.status { min-height: 26px; padding: 5px 18px; color: var(--muted); background: var(--panel); border-top: 1px solid var(--line); font-size: 12px; }
+.dialog-backdrop { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; background: #11182780; }
+.dialog-backdrop[hidden] { display: none; }
+.dialog { width: min(420px, calc(100vw - 32px)); padding: 22px; border-radius: 10px; background: #fff; box-shadow: 0 12px 40px #0003; }
+.dialog h2 { margin: 0 0 16px; }
+.dialog label { display: block; margin-bottom: 6px; font-weight: 650; }
+.dialog textarea { width: 100%; resize: vertical; padding: 9px; border: 1px solid var(--line); border-radius: 6px; }
+.dialog-actions { justify-content: flex-end; gap: 8px; margin-top: 16px; }
+@media (max-width: 700px) { .sidebar { width: 100px; } .tool span { display: none; } .toolbar { padding: 8px; } .canvas-area { padding: 15px; } .topbar { padding: 0 12px; } .brand { font-size: 14px; } }
